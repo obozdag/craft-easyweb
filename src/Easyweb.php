@@ -6,6 +6,7 @@ use Craft;
 use craft\base\Model;
 use craft\base\Plugin;
 use fklavye\easyweb\models\Settings;
+use fklavye\easyweb\services\FieldService;
 
 /**
  * Easyweb plugin
@@ -25,7 +26,7 @@ class Easyweb extends Plugin
     {
         return [
             'components' => [
-                // Define component configs here...
+                'fields' => FieldService::class, // Register the service here
             ],
         ];
     }
@@ -36,11 +37,22 @@ class Easyweb extends Plugin
 
         $this->attachEventHandlers();
 
-        // Any code that creates an element query or loads Twig should be deferred until
-        // after Craft is fully initialized, to avoid conflicts with other plugins/modules
-        Craft::$app->onInit(function() {
-            // ...
+        // Safe to use Craft services here after app init
+        Craft::$app->onInit(function () {
+            // You can defer code here if needed
         });
+    }
+
+    public function install(): bool
+    {
+        $installed = parent::install();
+
+        if ($installed) {
+            // Call the service to create the field on install
+            $this->fields->createPlainTextField();
+        }
+
+        return $installed;
     }
 
     protected function createSettingsModel(): ?Model
@@ -59,6 +71,5 @@ class Easyweb extends Plugin
     private function attachEventHandlers(): void
     {
         // Register event handlers here ...
-        // (see https://craftcms.com/docs/5.x/extend/events.html to get started)
     }
 }
