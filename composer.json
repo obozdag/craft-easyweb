@@ -1,0 +1,48 @@
+{
+  "name": "fklavye/craft-easyweb",
+  "description": "Quickly and easily create modern websites!",
+  "type": "craft-plugin",
+  "license": "proprietary",
+  "support": {
+    "email": "support@fklavye.net",
+    "issues": "https://github.com/obozdag/craft-easyweb/issues?state=open",
+    "source": "https://github.com/obozdag/craft-easyweb",
+    "docs": "https://github.com/obozdag/craft-easyweb",
+    "rss": "https://github.com/obozdag/craft-easyweb/releases.atom"
+  },
+  "require": {
+    "php": ">=8.2",
+    "craftcms/cms": "^5.7.0"
+  },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "fklavye\\easyweb\\": "src/"
+    }
+  },
+  "extra": {
+    "handle": "easyweb",
+    "name": "Easyweb",
+    "developer": "Fklavye",
+    "documentationUrl": "https://github.com/obozdag/craft-easyweb",
+    "class": "fklavye\\easyweb\\Easyweb"
+  },
+  "scripts": {
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --ansi --fix",
+    "phpstan": "phpstan --memory-limit=1G"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "8.2"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  }
+}
